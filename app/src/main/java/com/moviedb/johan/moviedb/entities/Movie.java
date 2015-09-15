@@ -140,4 +140,9 @@ public class Movie {
         this.backdropPath = backdropPath;
     }
 
+    public String getYear() {
+        if(getReleaseDate() == null) return "";
+
+        return "" + getReleaseDate().get(Calendar.YEAR);
+    }
 }

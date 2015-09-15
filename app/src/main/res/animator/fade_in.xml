@@ -1,0 +1,9 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android" android:fillAfter="false" >
+    <objectAnimator
+        android:propertyName="alpha"
+        android:duration="@integer/anim"
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        android:valueType="floatType"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+</set>

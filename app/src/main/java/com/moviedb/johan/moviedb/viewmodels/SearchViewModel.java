@@ -13,6 +13,9 @@ import com.moviedb.johan.moviedb.networking.SearchRequest;
 import com.moviedb.johan.moviedb.views.MovieItemView;
 import com.moviedb.johan.moviedb.views.SearchView;
 
+import java.io.IOException;
+import java.util.Calendar;
+
 /**
  * Created by Johan on 15/09/15.
  */
@@ -39,6 +42,13 @@ public class SearchViewModel implements SearchView.TextChangedListener {
             @Override
             public void onBindViewHolder(MovieItemView viewHolder, int i) {
                 viewHolder.setTitleText(movies[i].getTitle());
+                viewHolder.setMovieYear(movies[i].getYear());
+
+                try {
+                    viewHolder.setImageFromUrl("http://image.tmdb.org/t/p/w300" + movies[i].getPosterPath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -56,6 +66,9 @@ public class SearchViewModel implements SearchView.TextChangedListener {
 
     @Override
     public void onTextChanged(final String text) {
+        movies = new Movie[0];
+        mAdapter.notifyDataSetChanged();
+
         if (text.length() == 0) return;
 
         new AsyncTask<Void, Void, Movie[]>() {
@@ -76,10 +89,7 @@ public class SearchViewModel implements SearchView.TextChangedListener {
             protected void onPostExecute(Movie[] newMovies) {
                 super.onPostExecute(newMovies);
 
-                if(newMovies == null || newMovies.length == 0){
-                    movies = new Movie[0];
-                    mAdapter.notifyDataSetChanged();
-                }else{
+                if(newMovies != null && newMovies.length != 0){
                     movies = newMovies;
                     mAdapter.notifyDataSetChanged();
                 }
