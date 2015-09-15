@@ -12,7 +12,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
-import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -25,10 +24,10 @@ public class MovieItemView extends RecyclerView.ViewHolder{
     CircleImageView movieImage;
     View itemView;
 
+
     public MovieItemView(View itemView) {
         super(itemView);
         this.itemView = itemView;
-        ButterKnife.inject(itemView);
         movieTitle = (TextView) itemView.findViewById(R.id.movie_title);
         movieYear = (TextView) itemView.findViewById(R.id.movie_year);
         movieImage = (CircleImageView) itemView.findViewById(R.id.movie_image);

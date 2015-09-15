@@ -1,6 +1,7 @@
 package com.moviedb.johan.moviedb.viewmodels;
 
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,8 +26,9 @@ public class SearchViewModel implements SearchView.TextChangedListener {
 
     Movie[] movies;
     RecyclerView.Adapter mAdapter;
+    String currentText;
 
-    public void bind(SearchView searchView){
+    public void bind(final SearchView searchView) {
 
         this.searchView = searchView;
         movies = new Movie[0];
@@ -58,18 +60,30 @@ public class SearchViewModel implements SearchView.TextChangedListener {
 
         };
 
-        searchView.setup(this,mAdapter);
-
+        searchView.setup(this, mAdapter);
+        searchView.setupRefresh(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                searchView.setRefreshing(true);
+                onTextChanged(currentText);
+            }
+        });
 
     }
 
 
     @Override
     public void onTextChanged(final String text) {
+        currentText = text;
         movies = new Movie[0];
         mAdapter.notifyDataSetChanged();
 
-        if (text.length() == 0) return;
+        searchView.setRefreshable(false);
+        searchView.setLoading(text.length() != 0);
+
+        if (text.length() == 0) {
+            return;
+        }
 
         new AsyncTask<Void, Void, Movie[]>() {
             @Override
@@ -80,7 +94,6 @@ public class SearchViewModel implements SearchView.TextChangedListener {
 
                     return movies;
                 } catch (Exception e) {
-                    Log.d("Error", e.toString());
                     return null;
                 }
             }
@@ -88,11 +101,18 @@ public class SearchViewModel implements SearchView.TextChangedListener {
             @Override
             protected void onPostExecute(Movie[] newMovies) {
                 super.onPostExecute(newMovies);
+                searchView.setLoading(false);
+                searchView.setRefreshable(text.length() != 0);
 
-                if(newMovies != null && newMovies.length != 0){
+                if (newMovies != null && newMovies.length != 0) {
                     movies = newMovies;
                     mAdapter.notifyDataSetChanged();
+                    searchView.setErrorMessage(false);
+                }else{
+                    searchView.setErrorMessage(true);
                 }
+                searchView.setRefreshing(false);
+
             }
 
         }.execute();
