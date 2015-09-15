@@ -1,8 +1,10 @@
 package com.moviedb.johan.moviedb.activities;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.inputmethod.InputMethodManager;
 
 import com.moviedb.johan.moviedb.R;
 import com.moviedb.johan.moviedb.viewmodels.SearchViewModel;
@@ -23,14 +25,17 @@ public class SearchActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        ButterKnife.inject(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Test");
-        ButterKnife.inject(this);
+        toolbar.setTitle(getTitle());
 
         searchViewModel = new SearchViewModel();
         searchViewModel.bind(searchView);
 
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
     }
 
 

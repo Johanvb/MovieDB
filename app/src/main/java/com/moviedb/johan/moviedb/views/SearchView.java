@@ -9,22 +9,38 @@ import com.moviedb.johan.moviedb.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnTextChanged;
 
 /**
  * Created by Johan on 15/09/15.
  */
 public class SearchView extends FrameLayout{
 
+    private TextChangedListener listener;
+
+    public interface TextChangedListener {
+        void onTextChanged(String textChanged);
+    }
+
     @InjectView(R.id.movie_search_text)
     EditText movieSearchText;
+    Context context;
+
 
     public SearchView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-//        ButterKnife.inject(this);
+        inflate(context, R.layout.view_search, this);
+        ButterKnife.inject(this);
+        this.context = context;
     }
 
-    public void setText(String text) {
+    public void setup(TextChangedListener listener){
 
+        this.listener =  listener;
+
+    }
+
+    @OnTextChanged(R.id.movie_search_text) void onTextChanged(CharSequence text) {
+        listener.onTextChanged(text.toString());
     }
 }

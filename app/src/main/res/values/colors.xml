@@ -11,10 +11,10 @@
 
     <item name="ripple" type="color">#99000000</item>
 
-    <item name="green" type="color">#2c5d44</item>
+    <item name="green" type="color">#2c7d44</item>
     <item name="green_dark" type="color">#1d5639</item>
     <item name="green_dark_pressed" type="color">#1a4d33</item>
-    <item name="green_light" type="color">#15a183</item>
+    <item name="green_light" type="color">#55a165</item>
     <item name="green_light_transparent" type="color">#998315a1</item>
     <item name="green_very_light" type="color">#b4ccc8</item>
 
