@@ -11,12 +11,12 @@
 
     <item name="ripple" type="color">#99000000</item>
 
-    <item name="blue" type="color">#2c445d</item>
-    <item name="blue_dark" type="color">#1d3956</item>
-    <item name="blue_dark_pressed" type="color">#1a334d</item>
-    <item name="blue_light" type="color">#1583a1</item>
-    <item name="blue_light_transparent" type="color">#991583a1</item>
-    <item name="blue_very_light" type="color">#b4c8cc</item>
+    <item name="green" type="color">#2c5d44</item>
+    <item name="green_dark" type="color">#1d5639</item>
+    <item name="green_dark_pressed" type="color">#1a4d33</item>
+    <item name="green_light" type="color">#15a183</item>
+    <item name="green_light_transparent" type="color">#998315a1</item>
+    <item name="green_very_light" type="color">#b4ccc8</item>
 
     <item name="background_white" type="color">#ffffff</item>
     <item name="background_grey_light" type="color">#f1f1f1</item>
