@@ -1,10 +1,16 @@
 package com.moviedb.johan.moviedb.viewmodels;
 
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.moviedb.johan.moviedb.R;
 import com.moviedb.johan.moviedb.entities.Movie;
 import com.moviedb.johan.moviedb.networking.SearchRequest;
+import com.moviedb.johan.moviedb.views.MovieItemView;
 import com.moviedb.johan.moviedb.views.SearchView;
 
 /**
@@ -14,65 +20,72 @@ public class SearchViewModel implements SearchView.TextChangedListener {
 
     SearchView searchView;
 
+    Movie[] movies;
+    RecyclerView.Adapter mAdapter;
 
     public void bind(SearchView searchView){
 
         this.searchView = searchView;
-        searchView.setup(this);
+        movies = new Movie[0];
+
+        mAdapter = new RecyclerView.Adapter<MovieItemView>() {
+            @Override
+            public MovieItemView onCreateViewHolder(ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rowview_movie
+                        , viewGroup, false);
+                return new MovieItemView(view);
+            }
+
+            @Override
+            public void onBindViewHolder(MovieItemView viewHolder, int i) {
+                viewHolder.setTitleText(movies[i].getTitle());
+            }
+
+            @Override
+            public int getItemCount() {
+                return movies.length;
+            }
+
+        };
+
+        searchView.setup(this,mAdapter);
+
+
+    }
+
+
+    @Override
+    public void onTextChanged(final String text) {
+        if (text.length() == 0) return;
 
         new AsyncTask<Void, Void, Movie[]>() {
             @Override
             protected Movie[] doInBackground(Void... params) {
                 try {
 
-                    Movie[] movies = SearchRequest.getMovies("Fight");
-
+                    Movie[] movies = SearchRequest.getMovies(text);
 
                     return movies;
                 } catch (Exception e) {
                     Log.d("Error", e.toString());
                     return null;
                 }
-
-
             }
 
             @Override
-            protected void onPostExecute(Movie[] movies) {
-                super.onPostExecute(movies);
-            }
+            protected void onPostExecute(Movie[] newMovies) {
+                super.onPostExecute(newMovies);
 
-        }.execute();
-
-    }
-
-
-    @Override
-    public void onTextChanged(String text) {
-
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-
-//                    User receivedUser = UserRequest.getUser(Server.INSTANCE.getEndPoint(ProfileActivity.this), SharedPrefUtils.getToken(), user.getId());
-
-
-
-
-                } catch (Exception e) {
+                if(newMovies == null || newMovies.length == 0){
+                    movies = new Movie[0];
+                    mAdapter.notifyDataSetChanged();
+                }else{
+                    movies = newMovies;
+                    mAdapter.notifyDataSetChanged();
                 }
-
-                return null;
             }
 
-            @Override
-            protected void onPostExecute(Void result) {
-                super.onPostExecute(result);
-
-            }
         }.execute();
-
 
 
     }
