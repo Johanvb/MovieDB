@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="grey_light" type="color">#999999</item>
+    <item name="grey_divider" type="color">#e5e3e3</item>
+
+    <item name="black_transparent" type="color">#44000000</item>
+    <item name="white_transparent" type="color">#44ffffff</item>
+    <item name="white_clicked" type="color">#e5e5e5</item>
+
+    <item name="overlay_click" type="color">#1A000000</item>
+
+    <item name="ripple" type="color">#99000000</item>
+
+    <item name="blue" type="color">#2c445d</item>
+    <item name="blue_dark" type="color">#1d3956</item>
+    <item name="blue_dark_pressed" type="color">#1a334d</item>
+    <item name="blue_light" type="color">#1583a1</item>
+    <item name="blue_light_transparent" type="color">#991583a1</item>
+    <item name="blue_very_light" type="color">#b4c8cc</item>
+
+    <item name="background_white" type="color">#ffffff</item>
+    <item name="background_grey_light" type="color">#f1f1f1</item>
+    <item name="background_grey" type="color">#a8a8a8</item>
+    <item name="background_grey_dark" type="color">#393939</item>
+
+    <item name="text_white" type="color">#ffffff</item>
+    <item name="text_verylight" type="color">#c1c1c1</item>
+    <item name="text_light" type="color">#949393</item>
+    <item name="text" type="color">#414141</item>
+    <item name="grey_text" type="color">#5f5e5e</item>
+
+    <item name="text_navigation_item" type="color">#b1bac9</item>
+    <item name="text_navigation_header" type="color">#7388a2</item>
+</resources>
