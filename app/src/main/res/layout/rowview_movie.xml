@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/transparent_clickable">
+
     <include layout="@layout/divider"/>
 
     <LinearLayout
@@ -31,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/text"
                 android:textSize="@dimen/text_header"
+                android:transitionName="movie_title"
                 tools:text="I Am Legend" />
 
             <TextView
@@ -73,16 +75,13 @@
 
         </LinearLayout>
 
-
-
-
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/movie_image"
         app:border_width="@dimen/border_medium"
         android:scaleType="centerCrop"
+        android:transitionName="movie_image"
         app:border_color="@color/grey_divider"/>
 
     </LinearLayout>

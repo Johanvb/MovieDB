@@ -8,5 +8,9 @@
     <string name="rating">Rating:</string>
     <string name="type_movie_message">Type the name of a movie</string>
     <string name="movie">Movie</string>
+    <string name="rating_average">Rating average</string>
+    <string name="rating_count">Rating count</string>
+    <string name="language">Original language</string>
+    <string name="search_movie">Search movie</string>
 
 </resources>

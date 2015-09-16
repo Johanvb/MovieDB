@@ -3,6 +3,9 @@ package com.moviedb.johan.moviedb.viewmodels;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,13 +48,13 @@ public class SearchViewModel implements SearchView.TextChangedListener {
             }
 
             @Override
-            public void onBindViewHolder(MovieItemView viewHolder, final int i) {
+            public void onBindViewHolder(final MovieItemView viewHolder, final int i) {
                 viewHolder.setTitleText(movies[i].getTitle());
                 viewHolder.setMovieYear(movies[i].getYear());
                 viewHolder.setMovieRating(movies[i].getVoteAverage());
 
                 try {
-                    viewHolder.setImageFromUrl("http://image.tmdb.org/t/p/w300" + movies[i].getPosterPath());
+                    viewHolder.setImageFromUrl("http://image.tmdb.org/t/p/w500" + movies[i].getPosterPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -59,15 +62,20 @@ public class SearchViewModel implements SearchView.TextChangedListener {
                 viewHolder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-//                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, new Pair<View, String>(imageProfile, "image_profile"));
-//                            searchView.getContext().startActivity(EditProfileActivity.intent(this).get(), options.toBundle());
-//                        } else {
                         Intent intent = new Intent(searchView.getContext(), MovieActivity.class);
                         intent.putExtra(MovieActivity.EXTRA_MOVIE, Parcels.wrap(movies[i]));
 
-                        searchView.getContext().startActivity(intent);
+                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) searchView.getContext(),
+                                    new Pair<>(viewHolder.getMovieImage(), "movie_image"),
+                                    new Pair<>(viewHolder.getMovieTitle(), "movie_title"));
+
+
+                            searchView.getContext().startActivity(intent, options.toBundle());
+                        } else {
+                            searchView.getContext().startActivity(intent);
+                        }
+
                         ((Activity) searchView.getContext()).overridePendingTransition(R.anim.activity_open_front, R.anim.activity_close_behind);
 
                     }

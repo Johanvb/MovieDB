@@ -72,4 +72,12 @@ public class MovieItemView extends RecyclerView.ViewHolder{
     public void setOnClickListener(View.OnClickListener onClickListener) {
         itemView.setOnClickListener(onClickListener);
     }
+
+    public View getMovieImage() {
+        return movieImage;
+    }
+
+    public View getMovieTitle() {
+        return movieTitle;
+    }
 }

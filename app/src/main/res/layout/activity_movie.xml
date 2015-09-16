@@ -24,11 +24,11 @@
             />
     </LinearLayout>
 
-    <!--<com.moviedb.johan.moviedb.views.SearchView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/search_view">-->
-    <!--</com.moviedb.johan.moviedb.views.SearchView>-->
+    <com.moviedb.johan.moviedb.views.MovieView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/movie_view">
+    </com.moviedb.johan.moviedb.views.MovieView>
 
 
 </LinearLayout>

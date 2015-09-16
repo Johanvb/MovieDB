@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/background_white">
+
+
+    <include layout="@layout/divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="@dimen/margin_normal">
+
+        <TextView
+            android:id="@+id/key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Key"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_header"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Value"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_header"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

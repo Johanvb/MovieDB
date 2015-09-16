@@ -3,13 +3,13 @@
     <item name="grey_light" type="color">#999999</item>
     <item name="grey_divider" type="color">#e5e3e3</item>
 
-    <item name="black_transparent" type="color">#44000000</item>
+    <item name="black_transparent" type="color">#44000022</item>
     <item name="white_transparent" type="color">#44ffffff</item>
     <item name="white_clicked" type="color">#e5e5e5</item>
 
     <item name="overlay_click" type="color">#1A000000</item>
 
-    <item name="ripple" type="color">#99000000</item>
+    <item name="black" type="color">#000000</item>
 
     <item name="green" type="color">#2c7d44</item>
     <item name="green_dark" type="color">#1d5639</item>
