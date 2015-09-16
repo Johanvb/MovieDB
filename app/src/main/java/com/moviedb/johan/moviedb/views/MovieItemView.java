@@ -21,6 +21,8 @@ public class MovieItemView extends RecyclerView.ViewHolder{
 
     TextView movieTitle;
     TextView movieYear;
+    TextView movieRating;
+
     CircleImageView movieImage;
     View itemView;
 
@@ -30,8 +32,9 @@ public class MovieItemView extends RecyclerView.ViewHolder{
         this.itemView = itemView;
         movieTitle = (TextView) itemView.findViewById(R.id.movie_title);
         movieYear = (TextView) itemView.findViewById(R.id.movie_year);
-        movieImage = (CircleImageView) itemView.findViewById(R.id.movie_image);
+        movieRating = (TextView) itemView.findViewById(R.id.movie_rating);
 
+        movieImage = (CircleImageView) itemView.findViewById(R.id.movie_image);
     }
 
 
@@ -41,6 +44,10 @@ public class MovieItemView extends RecyclerView.ViewHolder{
 
     public void setMovieYear(String year) {
         movieYear.setText(year);
+    }
+
+    public void setMovieRating(float rating) {
+        movieRating.setText("" + rating);
     }
 
     public void setImageFromUrl(final String url) throws IOException {
@@ -62,5 +69,7 @@ public class MovieItemView extends RecyclerView.ViewHolder{
     }
 
 
-
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        itemView.setOnClickListener(onClickListener);
+    }
 }

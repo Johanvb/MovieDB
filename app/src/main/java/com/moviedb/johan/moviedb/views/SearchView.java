@@ -60,12 +60,22 @@ public class SearchView extends FrameLayout{
         layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         moviesList.setLayoutManager(layoutManager);
-
         moviesList.setAdapter(mAdapter);
+
+        showSearchMessage();
     }
 
     @OnTextChanged(R.id.movie_search_text) void onTextChanged(CharSequence text) {
         listener.onTextChanged(text.toString());
+    }
+
+    public void showSearchMessage() {
+        errorMessageView.setText(getContext().getString(R.string.type_movie_message));
+        errorMessageView.setVisibility(VISIBLE);
+
+        Animator fadeInAnim = AnimatorInflater.loadAnimator(errorMessageView.getContext(), R.animator.fade_in);
+        fadeInAnim.setTarget(errorMessageView);
+        fadeInAnim.start();
     }
 
     public interface TextChangedListener {
@@ -88,6 +98,9 @@ public class SearchView extends FrameLayout{
 
     public void setLoading(boolean isLoading){
 
+        if(loadingIndicator.getVisibility() == VISIBLE && isLoading){
+            return;
+        }
         loadingIndicator.setVisibility(isLoading ? VISIBLE : INVISIBLE);
 
         Animator fadeInAnim = AnimatorInflater.loadAnimator(loadingIndicator.getContext(), R.animator.fade_in);
@@ -97,7 +110,6 @@ public class SearchView extends FrameLayout{
     }
 
     public void setErrorMessage(boolean showError){
-
         if(showError){
             errorMessageView.setText(getContext().getString(R.string.movie_loading_error));
             errorMessageView.setVisibility(VISIBLE);

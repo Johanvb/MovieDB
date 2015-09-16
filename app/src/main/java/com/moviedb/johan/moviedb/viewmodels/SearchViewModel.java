@@ -1,21 +1,24 @@
 package com.moviedb.johan.moviedb.viewmodels;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.moviedb.johan.moviedb.R;
+import com.moviedb.johan.moviedb.activities.MovieActivity;
 import com.moviedb.johan.moviedb.entities.Movie;
 import com.moviedb.johan.moviedb.networking.SearchRequest;
 import com.moviedb.johan.moviedb.views.MovieItemView;
 import com.moviedb.johan.moviedb.views.SearchView;
 
+import org.parceler.Parcels;
+
 import java.io.IOException;
-import java.util.Calendar;
 
 /**
  * Created by Johan on 15/09/15.
@@ -42,15 +45,34 @@ public class SearchViewModel implements SearchView.TextChangedListener {
             }
 
             @Override
-            public void onBindViewHolder(MovieItemView viewHolder, int i) {
+            public void onBindViewHolder(MovieItemView viewHolder, final int i) {
                 viewHolder.setTitleText(movies[i].getTitle());
                 viewHolder.setMovieYear(movies[i].getYear());
+                viewHolder.setMovieRating(movies[i].getVoteAverage());
 
                 try {
                     viewHolder.setImageFromUrl("http://image.tmdb.org/t/p/w300" + movies[i].getPosterPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                viewHolder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+//                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, new Pair<View, String>(imageProfile, "image_profile"));
+//                            searchView.getContext().startActivity(EditProfileActivity.intent(this).get(), options.toBundle());
+//                        } else {
+                        Intent intent = new Intent(searchView.getContext(), MovieActivity.class);
+                        intent.putExtra(MovieActivity.EXTRA_MOVIE, Parcels.wrap(movies[i]));
+
+                        searchView.getContext().startActivity(intent);
+                        ((Activity) searchView.getContext()).overridePendingTransition(R.anim.activity_open_front, R.anim.activity_close_behind);
+
+                    }
+                });
+
             }
 
             @Override
@@ -81,9 +103,13 @@ public class SearchViewModel implements SearchView.TextChangedListener {
         searchView.setRefreshable(false);
         searchView.setLoading(text.length() != 0);
 
+
         if (text.length() == 0) {
+            searchView.showSearchMessage();
             return;
         }
+        searchView.setErrorMessage(false);
+
 
         new AsyncTask<Void, Void, Movie[]>() {
             @Override
@@ -108,7 +134,7 @@ public class SearchViewModel implements SearchView.TextChangedListener {
                     movies = newMovies;
                     mAdapter.notifyDataSetChanged();
                     searchView.setErrorMessage(false);
-                }else{
+                } else {
                     searchView.setErrorMessage(true);
                 }
                 searchView.setRefreshing(false);
@@ -116,7 +142,6 @@ public class SearchViewModel implements SearchView.TextChangedListener {
             }
 
         }.execute();
-
 
     }
 }
