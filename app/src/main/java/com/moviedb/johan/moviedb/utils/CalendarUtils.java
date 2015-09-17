@@ -9,6 +9,7 @@ import java.util.Calendar;
 public class CalendarUtils {
 
     public static String calendarToString(Calendar cal){
+        if(cal == null) return "";
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         return format.format(cal.getTime());

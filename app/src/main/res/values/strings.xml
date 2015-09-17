@@ -12,5 +12,11 @@
     <string name="rating_count">Rating count</string>
     <string name="language">Original language</string>
     <string name="search_movie">Search movie</string>
+    <string name="movie_description">Description</string>
+    <string name="movie_budget">Budget</string>
+    <string name="movie_status">Status</string>
+    <string name="movie_languages">Spoken languages</string>
+    <string name="movie_genres">Genres</string>
+    <string name="movie_genre">Genre</string>
 
 </resources>

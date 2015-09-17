@@ -55,9 +55,7 @@ public class SearchViewModel implements SearchView.TextChangedListener {
 
                 try {
                     viewHolder.setImageFromUrl("http://image.tmdb.org/t/p/w500" + movies[i].getPosterPath());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                } catch (IOException ignored) {}
 
                 viewHolder.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -70,17 +68,13 @@ public class SearchViewModel implements SearchView.TextChangedListener {
                                     new Pair<>(viewHolder.getMovieImage(), "movie_image"),
                                     new Pair<>(viewHolder.getMovieTitle(), "movie_title"));
 
-
                             searchView.getContext().startActivity(intent, options.toBundle());
                         } else {
                             searchView.getContext().startActivity(intent);
                         }
 
-                        ((Activity) searchView.getContext()).overridePendingTransition(R.anim.activity_open_front, R.anim.activity_close_behind);
-
                     }
                 });
-
             }
 
             @Override

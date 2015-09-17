@@ -1,13 +1,18 @@
 package com.moviedb.johan.moviedb.activities;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
+import android.transition.Transition;
 import android.view.MenuItem;
 
 import com.moviedb.johan.moviedb.R;
 import com.moviedb.johan.moviedb.entities.Movie;
+import com.moviedb.johan.moviedb.networking.MovieRequest;
+import com.moviedb.johan.moviedb.networking.SearchRequest;
 import com.moviedb.johan.moviedb.viewmodels.MovieViewModel;
 import com.moviedb.johan.moviedb.views.MovieView;
 
@@ -46,6 +51,40 @@ public class MovieActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setElevation(50);
+
+
+        loadMovieInfo();
+    }
+
+    private void loadMovieInfo() {
+
+        new AsyncTask<Void, Void, Movie>() {
+            @Override
+            protected Movie doInBackground(Void... params) {
+                try {
+
+                    Movie movie = MovieRequest.getMovieInfo(MovieActivity.this.movie.getId());
+
+                    return movie;
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Movie newMovie) {
+                super.onPostExecute(movie);
+
+                if(newMovie != null){
+                    movie = newMovie;
+                    movieViewModel.setDetailedMovieInfo(movie);
+
+                }
+
+
+            }
+
+        }.execute();
     }
 
 
@@ -54,7 +93,6 @@ public class MovieActivity extends AppCompatActivity {
 
         super.onBackPressed();
         overridePendingTransition(R.anim.activity_open_behind, R.anim.activity_close_front);
-
 
     }
 

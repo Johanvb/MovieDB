@@ -24,9 +24,7 @@ import java.util.Map;
  */
 public class SearchRequest {
 
-//    private static final String EXTENSION = "/search/movie?api_key=8b1ce0834d60ca35748781fb6b8c8331&query=fight";
     private static final String EXTENSION = "/search/movie";
-
 
     private static final String API_KEY_EXTENSION = "api_key";
     private static final String QUERY_EXTENSION = "query";

@@ -51,6 +51,104 @@ public class Movie {
     @JsonProperty("backdrop_path")
     String backdropPath;
 
+    @JsonProperty("belongs_to_collection")
+    String collection;
+
+    @JsonProperty("budget")
+    long budget;
+
+    @JsonProperty("homepage")
+    String homepage;
+
+    @JsonProperty("revenue")
+    long revenue;
+
+    @JsonProperty("runtime")
+    int runtime;
+
+    @JsonProperty("status")
+    String status;
+
+    @JsonProperty("tagline")
+    String tagLine;
+
+    @JsonProperty("spoken_languages")
+    Language[] languages;
+
+    @JsonProperty("genres")
+    Genre[] genres;
+
+    public long getBudget() {
+        return budget;
+    }
+
+    public void setBudget(long budget) {
+        this.budget = budget;
+    }
+
+    public String getHomepage() {
+        return homepage;
+    }
+
+    public void setHomepage(String homepage) {
+        this.homepage = homepage;
+    }
+
+    public long getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(long revenue) {
+        this.revenue = revenue;
+    }
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTagLine() {
+        return tagLine;
+    }
+
+    public void setTagLine(String tagLine) {
+        this.tagLine = tagLine;
+    }
+
+    public Language[] getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(Language[] languages) {
+        this.languages = languages;
+    }
+
+    public Genre[] getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Genre[] genres) {
+        this.genres = genres;
+    }
+
+    public String getCollection() {
+        return collection;
+    }
+
+    public void setCollection(String collection) {
+        this.collection = collection;
+    }
 
     public long getId() {
         return id;
