@@ -140,10 +140,7 @@ public class SearchViewModel implements SearchView.TextChangedListener {
                     searchView.setErrorMessage(true);
                 }
                 searchView.setRefreshing(false);
-
             }
-
         }.execute();
-
     }
 }

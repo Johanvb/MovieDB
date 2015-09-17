@@ -13,14 +13,14 @@ import butterknife.InjectView;
 /**
  * Created by Johan on 16/09/15.
  */
-public class InfoCell extends LinearLayout{
+public class KeyValueCell extends LinearLayout{
 
     @InjectView(R.id.key) TextView keyView;
     @InjectView(R.id.value) TextView valueView;
 
-    public InfoCell(Context context, AttributeSet attrs) {
+    public KeyValueCell(Context context, AttributeSet attrs) {
         super(context, attrs);
-        inflate(context, R.layout.info_cell, this);
+        inflate(context, R.layout.key_value_cell, this);
         ButterKnife.inject(this);
 
     }

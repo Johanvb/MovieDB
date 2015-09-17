@@ -38,27 +38,53 @@ public class MovieView extends LinearLayout {
 
 
     @InjectView(R.id.rating_average_cell)
-    InfoCell ratingAverageView;
+    KeyValueCell ratingAverageView;
     @InjectView(R.id.rating_count_cell)
-    InfoCell ratingCountView;
+    KeyValueCell ratingCountView;
     @InjectView(R.id.release_date_cell)
-    InfoCell releaseDatView;
+    KeyValueCell releaseDateView;
     @InjectView(R.id.description_cell)
-    InfoCell movieDescription;
+    TextCell movieDescription;
     @InjectView(R.id.budget_cell)
-    InfoCell budgetCell;
+    KeyValueCell budgetCell;
     @InjectView(R.id.genres_cell)
-    InfoCell genresCell;
+    KeyValueCell genresCell;
     @InjectView(R.id.spoken_languages_cell)
-    InfoCell languagesCell;
+    KeyValueCell languagesCell;
     @InjectView(R.id.status_cell)
-    InfoCell statusCell;
+    KeyValueCell statusCell;
+    @InjectView(R.id.revenue_cell)
+    KeyValueCell revenueCell;
+    @InjectView(R.id.runtime_cell)
+    KeyValueCell runtimeCell;
 
+    @InjectView(R.id.header_money)
+    HeaderCell moneyHeader;
+    @InjectView(R.id.header_rating)
+    HeaderCell ratingHeader;
+    @InjectView(R.id.header_release)
+    HeaderCell releaseHeader;
+    @InjectView(R.id.header_summary)
+    HeaderCell summaryHeader;
 
     public MovieView(Context context, AttributeSet attrs) {
         super(context, attrs);
         inflate(context, R.layout.view_movie, this);
         ButterKnife.inject(this);
+
+        ratingCountView.setKey(getContext().getString(R.string.rating_count));
+        releaseDateView.setKey(getContext().getString(R.string.movie_release));
+        runtimeCell.setKey(getContext().getString(R.string.movie_runtime));
+        revenueCell.setKey(getContext().getString(R.string.movie_revenue));
+        budgetCell.setKey(getContext().getString(R.string.movie_budget));
+        statusCell.setKey(getContext().getString(R.string.movie_status));
+        ratingAverageView.setKey(getContext().getString(R.string.rating_average));
+
+        moneyHeader.setText(getContext().getString(R.string.movie_economy));
+        ratingHeader.setText(getContext().getString(R.string.movie_rating));
+        releaseHeader.setText(getContext().getString(R.string.movie_release_header));
+        summaryHeader.setText(getContext().getString(R.string.movie_summary));
+
     }
 
     public void setMovieImage(String url, String posterPath) {
@@ -110,8 +136,7 @@ public class MovieView extends LinearLayout {
             movieDescription.setVisibility(GONE);
             return;
         }
-        movieDescription.setKey(getContext().getString(R.string.movie_description));
-        movieDescription.setValue(description);
+        movieDescription.setText(description);
     }
 
     public void setBudget(long budget) {
@@ -119,8 +144,8 @@ public class MovieView extends LinearLayout {
             budgetCell.setVisibility(GONE);
             return;
         }
+        moneyHeader.setVisibility(VISIBLE);
         budgetCell.setVisibility(VISIBLE);
-        budgetCell.setKey(getContext().getString(R.string.movie_budget));
         budgetCell.setValue("$" + budget);
     }
 
@@ -129,9 +154,17 @@ public class MovieView extends LinearLayout {
             genresCell.setVisibility(GONE);
             return;
         }
+        summaryHeader.setVisibility(VISIBLE);
         genresCell.setVisibility(VISIBLE);
         genresCell.setKey(genres.length == 1 ? getContext().getString(R.string.movie_genre) : getContext().getString(R.string.movie_genres));
-        genresCell.setValue("$");
+
+        String genresString = "";
+
+        for (int i = 0; i < genres.length; i++) {
+            genresString += genres[i].getGenreName() + (i == genres.length - 1 ? "" : "\n");
+        }
+
+        genresCell.setValue(genresString);
     }
 
     public void setLanguages(Language[] languages) {
@@ -139,9 +172,17 @@ public class MovieView extends LinearLayout {
             languagesCell.setVisibility(GONE);
             return;
         }
+        summaryHeader.setVisibility(VISIBLE);
         languagesCell.setVisibility(VISIBLE);
-        languagesCell.setKey(getContext().getString(R.string.movie_languages));
-        languagesCell.setValue("$");
+        languagesCell.setKey(languages.length == 1 ? getContext().getString(R.string.movie_language) : getContext().getString(R.string.movie_languages));
+
+        String languagesString = "";
+
+        for (int i = 0; i < languages.length; i++) {
+            languagesString += languages[i].getName() + (i == languages.length - 1 ? "" : "\n");
+        }
+
+        languagesCell.setValue(languagesString);
     }
 
     public void setStatus(String status) {
@@ -149,31 +190,54 @@ public class MovieView extends LinearLayout {
             statusCell.setVisibility(GONE);
             return;
         }
+        releaseHeader.setVisibility(VISIBLE);
         statusCell.setVisibility(VISIBLE);
-        statusCell.setKey(getContext().getString(R.string.movie_status));
         statusCell.setValue(status);
     }
 
 
     public void setRatingAverage(float ratingAverage) {
+        if(ratingAverage == 0.0f)return;
 
-        ratingAverageView.setKey(getContext().getString(R.string.rating_average));
+        ratingHeader.setVisibility(VISIBLE);
+        ratingAverageView.setVisibility(VISIBLE);
         ratingAverageView.setValue("" + ratingAverage);
 
     }
 
     public void setRatingCount(int ratingCount) {
+        if(ratingCount == 0)return;
 
-        ratingCountView.setKey(getContext().getString(R.string.rating_count));
+        ratingHeader.setVisibility(VISIBLE);
+        ratingCountView.setVisibility(VISIBLE);
         ratingCountView.setValue("" + ratingCount);
 
     }
 
     public void setReleaseDate(Calendar releaseDate) {
 
-        releaseDatView.setKey(getContext().getString(R.string.rating_count));
-        releaseDatView.setValue(CalendarUtils.calendarToString(releaseDate));
+        releaseHeader.setVisibility(VISIBLE);
+        releaseDateView.setValue(CalendarUtils.calendarToString(releaseDate));
 
     }
 
+    public void setRuntime(int runtime) {
+        if (runtime == 0) {
+            runtimeCell.setVisibility(GONE);
+            return;
+        }
+        summaryHeader.setVisibility(VISIBLE);
+        runtimeCell.setVisibility(VISIBLE);
+        runtimeCell.setValue(runtime + " min");
+    }
+
+    public void setRevenue(long revenue) {
+        if (revenue == 0) {
+            revenueCell.setVisibility(GONE);
+            return;
+        }
+        moneyHeader.setVisibility(VISIBLE);
+        revenueCell.setVisibility(VISIBLE);
+        revenueCell.setValue("$" + revenue);
+    }
 }

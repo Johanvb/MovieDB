@@ -48,10 +48,10 @@ public class MovieActivity extends AppCompatActivity {
         movieViewModel.bind(movieView);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_clear_mtrl_alpha);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setElevation(50);
-
 
         loadMovieInfo();
     }
@@ -75,27 +75,13 @@ public class MovieActivity extends AppCompatActivity {
             protected void onPostExecute(Movie newMovie) {
                 super.onPostExecute(movie);
 
-                if(newMovie != null){
+                if (newMovie != null) {
                     movie = newMovie;
                     movieViewModel.setDetailedMovieInfo(movie);
-
                 }
-
-
             }
-
         }.execute();
     }
-
-
-    @Override
-    public void onBackPressed() {
-
-        super.onBackPressed();
-        overridePendingTransition(R.anim.activity_open_behind, R.anim.activity_close_front);
-
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

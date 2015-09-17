@@ -35,6 +35,8 @@ public class MovieViewModel {
         movieView.setGenres(movie.getGenres());
         movieView.setLanguages(movie.getLanguages());
         movieView.setStatus(movie.getStatus());
+        movieView.setRuntime(movie.getRuntime());
+        movieView.setRevenue(movie.getRevenue());
 
     }
 

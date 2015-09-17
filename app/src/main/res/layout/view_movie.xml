@@ -10,7 +10,7 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:parallax_factor="2">
+        app:parallax_factor="1.5">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,6 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:gravity="center"
                         android:layout_marginBottom="@dimen/margin_normal"
                         android:paddingLeft="@dimen/margin_normal"
                         android:paddingRight="@dimen/margin_normal"
@@ -70,7 +71,7 @@
                         android:shadowRadius="10"
                         android:textColor="@color/text_white"
                         android:textSize="@dimen/text_large"
-                        android:transitionName="movie_title"
+                        android:transitionName="A Walk Among Tombstones"
                         tools:text="Testsdsdfs" />
 
 
@@ -103,67 +104,110 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.moviedb.johan.moviedb.views.InfoCell
+                <com.moviedb.johan.moviedb.views.TextCell
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/description_cell"
                     />
 
-                <com.moviedb.johan.moviedb.views.InfoCell
+                <com.moviedb.johan.moviedb.views.HeaderCell
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/header_money"
+                    android:visibility="gone"
+                    />
+
+
+                <com.moviedb.johan.moviedb.views.KeyValueCell
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/budget_cell"
                     android:visibility="gone"
                     />
 
-                <com.moviedb.johan.moviedb.views.InfoCell
+                <com.moviedb.johan.moviedb.views.KeyValueCell
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/revenue_cell"
+                    android:visibility="gone"
+                    />
+
+                <com.moviedb.johan.moviedb.views.HeaderCell
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/header_summary"
+                    android:visibility="gone"
+                    />
+
+                <com.moviedb.johan.moviedb.views.KeyValueCell
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/genres_cell"
                     android:visibility="gone"
                     />
 
-                <com.moviedb.johan.moviedb.views.InfoCell
+                <com.moviedb.johan.moviedb.views.KeyValueCell
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/spoken_languages_cell"
                     android:visibility="gone"
                     />
 
-                <com.moviedb.johan.moviedb.views.InfoCell
+                <com.moviedb.johan.moviedb.views.KeyValueCell
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/runtime_cell"
+                    android:visibility="gone"
+                    />
+
+
+                <com.moviedb.johan.moviedb.views.HeaderCell
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/header_release"
+                    android:visibility="gone"
+                    />
+
+                <com.moviedb.johan.moviedb.views.KeyValueCell
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/status_cell"
                     android:visibility="gone"
                     />
 
-                <com.moviedb.johan.moviedb.views.InfoCell
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rating_average_cell"
-                    />
-
-                <com.moviedb.johan.moviedb.views.InfoCell
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rating_count_cell"
-                    />
-
-                <com.moviedb.johan.moviedb.views.InfoCell
+                <com.moviedb.johan.moviedb.views.KeyValueCell
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/release_date_cell"
                     />
 
+                <com.moviedb.johan.moviedb.views.HeaderCell
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/header_rating"
+                    android:visibility="gone"
+                    />
 
+                <com.moviedb.johan.moviedb.views.KeyValueCell
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rating_average_cell"
+                    android:visibility="gone"
+                    />
 
+                <com.moviedb.johan.moviedb.views.KeyValueCell
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rating_count_cell"
+                    android:visibility="gone"
+                    />
+
+                <include layout="@layout/divider"/>
 
             </LinearLayout>
-
 
         </LinearLayout>
 
     </com.nirhart.parallaxscroll.views.ParallaxScrollView>
-
 
 </FrameLayout>
