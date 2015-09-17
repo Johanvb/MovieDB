@@ -71,6 +71,8 @@ public class SearchViewModel implements SearchView.TextChangedListener {
                             searchView.getContext().startActivity(intent, options.toBundle());
                         } else {
                             searchView.getContext().startActivity(intent);
+                            ((Activity)searchView.getContext()).overridePendingTransition(R.anim.activity_open_front, R.anim.activity_close_behind);
+
                         }
 
                     }

@@ -1,5 +1,6 @@
 package com.moviedb.johan.moviedb.activities;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -81,6 +82,13 @@ public class MovieActivity extends AppCompatActivity {
                 }
             }
         }.execute();
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        overridePendingTransition(R.anim.activity_open_behind, R.anim.activity_close_front);
+
     }
 
     @Override
