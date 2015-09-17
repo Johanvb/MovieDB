@@ -33,7 +33,6 @@ public class MovieItemView extends RecyclerView.ViewHolder{
         movieTitle = (TextView) itemView.findViewById(R.id.movie_title);
         movieYear = (TextView) itemView.findViewById(R.id.movie_year);
         movieRating = (TextView) itemView.findViewById(R.id.movie_rating);
-
         movieImage = (CircleImageView) itemView.findViewById(R.id.movie_image);
     }
 

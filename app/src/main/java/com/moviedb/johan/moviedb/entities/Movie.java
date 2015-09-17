@@ -19,7 +19,6 @@ public class Movie {
     @JsonProperty("id")
     long id;
 
-
     @JsonProperty("original_language")
     String originalLanguage;
 

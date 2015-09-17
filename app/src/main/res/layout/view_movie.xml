@@ -53,7 +53,7 @@
                         android:transitionName="movie_image"
                         app:border_color="@color/grey_divider"
                         app:border_width="@dimen/border_medium"
-                        tools:src="@drawable/f"/>
+                        />
 
                     <TextView
 

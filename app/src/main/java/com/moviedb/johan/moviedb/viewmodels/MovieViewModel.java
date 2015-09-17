@@ -1,6 +1,7 @@
 package com.moviedb.johan.moviedb.viewmodels;
 
 import com.moviedb.johan.moviedb.entities.Movie;
+import com.moviedb.johan.moviedb.utils.NetworkingUtils;
 import com.moviedb.johan.moviedb.views.MovieView;
 
 /**
@@ -17,7 +18,7 @@ public class MovieViewModel {
 
     public void bind(MovieView  movieView) {
         this.movieView = movieView;
-        movieView.setMovieImage("http://image.tmdb.org/t/p/w500", movie.getPosterPath());
+        movieView.setMovieImage(NetworkingUtils.baseImageUrl, movie.getPosterPath());
         movieView.setMovieTitle(movie.getTitle());
         movieView.setMovieDescription(movie.getOverview());
 

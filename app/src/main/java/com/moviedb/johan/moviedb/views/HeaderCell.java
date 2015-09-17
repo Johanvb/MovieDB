@@ -30,7 +30,4 @@ public class HeaderCell extends LinearLayout{
         headerCell.setText(text);
     }
 
-
-
-
 }

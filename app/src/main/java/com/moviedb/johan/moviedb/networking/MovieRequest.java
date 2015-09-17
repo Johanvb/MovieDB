@@ -19,7 +19,6 @@ public class MovieRequest {
     private static final String EXTENSION = "/movie/";
 
     private static final String API_KEY_EXTENSION = "api_key";
-    private static final String QUERY_EXTENSION = "query";
 
     public static com.squareup.okhttp.Request buildRequest(long id) throws IOException {
         String urlString = NetworkingUtils.baseUrl + EXTENSION + id ;

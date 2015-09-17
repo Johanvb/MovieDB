@@ -17,7 +17,6 @@ public class Genre {
     @JsonProperty("id")
     long id;
 
-
     @JsonProperty("name")
     String genreName;
 

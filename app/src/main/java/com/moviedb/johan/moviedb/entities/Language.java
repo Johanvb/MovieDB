@@ -16,15 +16,12 @@ import org.parceler.Parcel;
 
 public class Language {
 
-
     @JsonProperty("iso_639_1")
 
     String iso;
 
     @JsonProperty("name")
     String name;
-
-
 
     public String getIso() {
         return iso;

@@ -16,6 +16,7 @@ import com.moviedb.johan.moviedb.R;
 import com.moviedb.johan.moviedb.activities.MovieActivity;
 import com.moviedb.johan.moviedb.entities.Movie;
 import com.moviedb.johan.moviedb.networking.SearchRequest;
+import com.moviedb.johan.moviedb.utils.NetworkingUtils;
 import com.moviedb.johan.moviedb.views.MovieItemView;
 import com.moviedb.johan.moviedb.views.SearchView;
 
@@ -54,8 +55,9 @@ public class SearchViewModel implements SearchView.TextChangedListener {
                 viewHolder.setMovieRating(movies[i].getVoteAverage());
 
                 try {
-                    viewHolder.setImageFromUrl("http://image.tmdb.org/t/p/w500" + movies[i].getPosterPath());
-                } catch (IOException ignored) {}
+                    viewHolder.setImageFromUrl(NetworkingUtils.baseImageUrl + movies[i].getPosterPath());
+                } catch (IOException ignored) {
+                }
 
                 viewHolder.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -63,7 +65,7 @@ public class SearchViewModel implements SearchView.TextChangedListener {
                         Intent intent = new Intent(searchView.getContext(), MovieActivity.class);
                         intent.putExtra(MovieActivity.EXTRA_MOVIE, Parcels.wrap(movies[i]));
 
-                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) searchView.getContext(),
                                     new Pair<>(viewHolder.getMovieImage(), "movie_image"),
                                     new Pair<>(viewHolder.getMovieTitle(), "movie_title"));
@@ -71,10 +73,9 @@ public class SearchViewModel implements SearchView.TextChangedListener {
                             searchView.getContext().startActivity(intent, options.toBundle());
                         } else {
                             searchView.getContext().startActivity(intent);
-                            ((Activity)searchView.getContext()).overridePendingTransition(R.anim.activity_open_front, R.anim.activity_close_behind);
+                            ((Activity) searchView.getContext()).overridePendingTransition(R.anim.activity_open_front, R.anim.activity_close_behind);
 
                         }
-
                     }
                 });
             }
@@ -107,13 +108,11 @@ public class SearchViewModel implements SearchView.TextChangedListener {
         searchView.setRefreshable(false);
         searchView.setLoading(text.length() != 0);
 
-
         if (text.length() == 0) {
             searchView.showSearchMessage();
             return;
         }
         searchView.setErrorMessage(false);
-
 
         new AsyncTask<Void, Void, Movie[]>() {
             @Override

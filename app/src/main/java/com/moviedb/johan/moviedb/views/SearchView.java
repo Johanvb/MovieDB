@@ -123,5 +123,4 @@ public class SearchView extends FrameLayout{
 
     }
 
-
 }
